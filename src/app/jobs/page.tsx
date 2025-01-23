@@ -1,8 +1,9 @@
 'use client'
+
 import React, {useState} from 'react';
 import {fetchJobsFromEndpoint, JobPosting} from "@/api/jobs/types";
 import {SearchForm} from "@/components/SearchForm";
-import {JobList} from "@/components/jobs/JobList";
+import {JobList} from "@/app/jobs/components/JobList";
 
 const baseUrl = 'http://localhost:8000';
 const endpoint = '/api/get-jobs'
