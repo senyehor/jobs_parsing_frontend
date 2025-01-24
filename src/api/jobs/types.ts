@@ -11,7 +11,7 @@ export async function fetchJobsFromEndpoint(
     baseUrl: string, endpoint: string, keywords: string[]
 ): Promise<JobPosting[]> {
     const searchParams = new URLSearchParams();
-    keywords.forEach((keyword) => searchParams.append('keyword', keyword));
+    keywords.forEach((keyword) => searchParams.append('keywords', keyword));
     const response = await fetch(`${baseUrl}${endpoint}?${searchParams.toString()}`);
     if (!response.ok) {
         throw new Error(`Failed to fetch jobs from ${endpoint}`);
