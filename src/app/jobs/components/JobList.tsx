@@ -1,14 +1,15 @@
 import React from 'react';
 
 import {Card, CardContent, Grid2, Link, Typography} from "@mui/material";
-import {JobPosting} from "@/api/jobs/types";
+import {JobPosting} from "@/api/types";
 
 export function JobList({jobs}: { jobs: JobPosting[] }) {
     return (
-        <Grid2 container spacing={3}>
+        <Grid2 container spacing={3} pt={3}>
             {jobs.map((job) => (
                 <Grid2 key={job.link}>
-                    <Card variant="outlined">
+                    <Card variant="outlined"
+                          sx={{backgroundColor: "#444444", color: '#ffffff'}}>
                         <CardContent>
                             <Typography variant="h6">
                                 <Link href={job.link} target="_blank" rel="noopener noreferrer"

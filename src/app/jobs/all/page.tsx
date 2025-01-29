@@ -1,12 +1,12 @@
 'use client'
 
 import React, {useState} from 'react';
-import {fetchJobsFromEndpoint, JobPosting} from "@/api/jobs/types";
+import {JobPosting} from "@/api/types";
 import {SearchForm} from "@/components/SearchForm";
 import {JobList} from "@/app/jobs/components/JobList";
+import {fetchJobs as fetchJobsFromEndpoint} from "@/api/services";
 
-const baseUrl = 'http://localhost:8000';
-const endpoint = '/api/dou-by-category'
+const endpoint = 'all-sites/'
 
 export default function JobListings() {
     const [searchKeywords, setSearchKeywords] = useState<string>('');
@@ -23,7 +23,10 @@ export default function JobListings() {
         })
 
         try {
-            const data = await fetchJobsFromEndpoint(baseUrl, endpoint, keywords);
+            const data = await fetchJobsFromEndpoint({
+                endpoint: endpoint,
+                keywords: keywords
+            });
             setJobs(data);
         } catch (error) {
             setError('Failed to fetch jobs. Please try again.');

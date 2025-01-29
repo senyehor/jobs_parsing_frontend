@@ -19,8 +19,10 @@ export function SearchForm(
     };
 
     return (
-        <Box component="form" onSubmit={handleSubmit} display="flex" flexDirection={{xs: 'column', sm: 'row'}}
-             alignItems="center">
+        <Box component="form" onSubmit={handleSubmit} display="flex"
+             flexDirection={{xs: 'column', sm: 'row'}}
+             alignItems="center"
+        >
             <TextField
                 variant="outlined"
                 placeholder={placeholder}
@@ -29,7 +31,23 @@ export function SearchForm(
                 fullWidth
                 margin="normal"
                 size="medium"
-                sx={{flexGrow: 1, marginBottom: {xs: 1, sm: 0}}}
+                sx={{
+                    flexGrow: 1, marginBottom: {xs: 1, sm: 0},
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#cccccc',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#aaaaaa',
+                        },
+                        '& input::placeholder': {
+                            color: '#ffffff',
+                        },
+                        '& input': {
+                            color: '#ffffff', // Change input text color to white
+                        },
+                    },
+                }}
             />
             <Button
                 type="submit"
