@@ -1,4 +1,4 @@
-"use client"; // Ensure this runs on the client side
+"use client";
 
 import {usePathname} from "next/navigation";
 import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
