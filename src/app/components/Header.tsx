@@ -15,9 +15,11 @@ export default function Header() {
     return (
         <AppBar position="static" sx={{backgroundColor: "#222"}}>
             <Toolbar>
-                <Typography variant="h6" sx={{flexGrow: 1}}>
-                    JobFinder
-                </Typography>
+                <Link href="/" passHref legacyBehavior>
+                    <Typography variant="h6" sx={{flexGrow: 1, cursor: "pointer"}}>
+                        JobFinder
+                    </Typography>
+                </Link>
                 <Box sx={{display: "flex", gap: 2}}>
                     {navItems.map(({label, path}) => (
                         <Button
