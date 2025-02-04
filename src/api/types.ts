@@ -6,3 +6,10 @@ export interface JobPosting {
     employment_type: string | null;
     posted_at: Date | null;
 }
+
+export interface JobSiteInfo {
+    name: string;
+    slug: string;
+    link: string;
+    description?: string;
+}

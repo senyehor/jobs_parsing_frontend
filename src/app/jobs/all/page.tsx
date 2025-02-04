@@ -1,18 +1,31 @@
 'use client'
 
-import React, {useState} from 'react';
-import {JobPosting} from "@/api/types";
+import React, {useEffect, useState} from 'react';
+import {JobPosting, JobSiteInfo} from "@/api/types";
 import {SearchForm} from "@/components/SearchForm";
 import {JobList} from "@/app/jobs/components/JobList";
-import {fetchJobs as fetchJobsFromEndpoint} from "@/api/services";
+import {fetchJobs as fetchJobsFromEndpoint, fetchJobSites} from "@/api/services";
+import {JobSiteFilters} from "@/app/jobs/components/JobSiteFilter";
 
 const endpoint = 'all-sites/'
 
 export default function JobListings() {
     const [searchKeywords, setSearchKeywords] = useState<string>('');
     const [jobs, setJobs] = useState<JobPosting[]>([]);
+    const [slugs, setSlugs] = useState<string[]>([]);
+    const [jobSites, setJobSites] = useState<JobSiteInfo[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+
+    useEffect(() => {
+            const loadJobSites = async () => {
+                const sites = await fetchJobSites();
+                setJobSites(sites);
+                setSlugs(sites.map((site) => site.slug))
+            };
+            loadJobSites();
+        }, []
+    );
 
     const fetchJobs = async (keywords: string[]) => {
         setLoading(true);
@@ -49,6 +62,13 @@ export default function JobListings() {
                             .filter(keyword => keyword))
                     }
                 />
+                <JobSiteFilters
+                    selectedSlugs={slugs}
+                    jobSites={jobSites}
+                    onSlugsChange={setSlugs}
+                />
+
+
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
                 <JobList jobs={jobs}/>
